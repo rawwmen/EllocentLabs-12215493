@@ -27,6 +27,6 @@ const limitedFn = rateLimit(() => {
 }, 2000)
 
 limitedFn()
+limitedFn()
 
 //I’m using a closure to store a flag that controls execution and resetting it after the delay using setTimeout.
-limitedFn()
