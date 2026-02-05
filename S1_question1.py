@@ -16,19 +16,20 @@
 
 from collections import Counter
 
-def leastInterval(tasks, n):
-    freq = Counter(tasks)
-    
-    max_count = max(freq.values())
-    same_max = list(freq.values()).count(max_count)
-    
-    time_needed = (max_count - 1) * (n + 1) + same_max
-    
-    return max(len(tasks), time_needed)
+def taskScheduler(task_list, cooldown):
+    task_map = Counter(task_list)
 
-tasks = ["A", "A", "A", "B", "B", "B"]
-n = 2
+    highest = max(task_map.values())
+    highest_count = sum(1 for v in task_map.values() if v == highest)
 
-print(leastInterval(tasks, n))
+    required_time = (highest - 1) * (cooldown + 1) + highest_count
+
+    return max(len(task_list), required_time)
+
+
+jobs = ["A", "A", "A", "B", "B", "B"]
+cooldown = 2
+
+print(taskScheduler(jobs, cooldown))
 
 # I don’t simulate idle slots directly. I calculate the minimum spacing needed for the most frequent tasks and only count idle time when other tasks can’t fill those gaps.
